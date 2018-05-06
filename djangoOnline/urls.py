@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+import xadmin
 from django.conf.urls import  url
 from message.views import getform
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^form/$',getform,name='form_new'),
+    path('xadmin/',xadmin.site.urls),
+
 ]

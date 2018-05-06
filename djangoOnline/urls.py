@@ -18,9 +18,19 @@ from django.urls import path
 import xadmin
 from django.conf.urls import  url
 from message.views import getform
+from users.views import login
+from users.views import RegisterView
+
+from django.views.generic import  TemplateView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^form/$',getform,name='form_new'),
     path('xadmin/',xadmin.site.urls),
+    path('',TemplateView.as_view(template_name='index.html'),name='index'),
+    path('login/',login,name='login'),
+
+    # 注册url
+    path("register/", RegisterView.as_view(), name = "register" )
+
 
 ]

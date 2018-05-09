@@ -38,7 +38,7 @@ xadmin.site.register(views.BaseAdminView,BaseSetting)
 
 class GlobalSetting(object):
     site_title='Tony.Yang 后台管理'
-    site_footer='tony.Yang mooc'
+    site_footer='tony.Yang Station'
 
     menu_style ='accordion'
 

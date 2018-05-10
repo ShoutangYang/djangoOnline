@@ -19,7 +19,7 @@ import xadmin
 from django.conf.urls import  url,include
 from message.views import getform
 from users.views import user_login
-from users.views import LoginView,RegisterView,ActiveUserView
+from users.views import LoginView,RegisterView,ActiveUserView,ForgetPwdView,ResetView,ModifyPwdView
 
 from django.views.generic import  TemplateView
 
@@ -33,8 +33,12 @@ urlpatterns = [
     path('captcha/',include('captcha.urls')),
     re_path('active/(?P<active_code>.*)/',ActiveUserView.as_view(),name ='user_active'),
 
+    path('forget/',ForgetPwdView.as_view(),name = 'forget_pwd'),
+    re_path('reset/(?P<active_code>.*)/',ResetView.as_view(),name = 'reset_pwd'),
+
+    # 修改密码url; 用于passwordreset页面提交表单
+    path('modify_pwd/', ModifyPwdView.as_view(), name="modify_pwd"),
     # 注册url
  # path("register/", RegisterView.as_view(), name = "register" )
-
 
 ]

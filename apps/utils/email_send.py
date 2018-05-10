@@ -67,7 +67,7 @@ def send_register_eamil(email, send_type="register"):
         send_status = msg.send()
         # 使用Django内置函数完成邮件发送。四个参数：主题，邮件内容，从哪里发，接受者list
         # send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
-        print(send_status)
+        # print(send_status)
         # 如果发送成功
         if send_status:
                 pass

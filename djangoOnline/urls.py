@@ -20,6 +20,8 @@ from django.conf.urls import  url,include
 from message.views import getform
 from users.views import user_login
 from users.views import LoginView,RegisterView,ActiveUserView,ForgetPwdView,ResetView,ModifyPwdView
+from organization.views import OrgView
+
 
 from django.views.generic import  TemplateView
 
@@ -38,6 +40,9 @@ urlpatterns = [
 
     # 修改密码url; 用于passwordreset页面提交表单
     path('modify_pwd/', ModifyPwdView.as_view(), name="modify_pwd"),
+
+    path('org_list/',OrgView.as_view(),name='org_list'),
+
     # 注册url
  # path("register/", RegisterView.as_view(), name = "register" )
 

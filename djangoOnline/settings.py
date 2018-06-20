@@ -18,7 +18,8 @@ import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+# 1.将apps 路径导入全局路径；
+# 2.将外部apps路径导入全局路径；
 sys.path.insert(0,os.path.join(BASE_DIR,'apps'))
 sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 
@@ -44,9 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'message',
-    'users',
-    'courses',
+    'message',#注册应用
+    'users', # 注册应用
+    'courses', # 注册应用
     'organization',
     'operation',
     'xadmin',
@@ -66,6 +67,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'djangoOnline.urls'
 
+# 添加 temple 的路径
 
 TEMPLATES = [
     {
@@ -89,6 +91,10 @@ WSGI_APPLICATION = 'djangoOnline.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
+# 1.设置数据库类型
+# 2 设置用户名和密码
+# 3.设置主机ip,同native 结合；
 
 DATABASES = {
     'default': {
@@ -149,7 +155,7 @@ STATICFILES_DIRS=[
 
 
 
-
+#
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'to_tsy@163.com'

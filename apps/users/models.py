@@ -2,7 +2,7 @@ from datetime import  datetime
 from django.db import  models
 from django.contrib.auth.models import AbstractUser
 
-
+#  继承AbstractUser
 class UserProfile(AbstractUser):
     # 自定义的性别选择规则
     GENDER_CHOICES = (
@@ -39,8 +39,9 @@ class UserProfile(AbstractUser):
     def __unicode__(self):
         return self.username
 
-
+# 验证邮箱验证码/
 class EmailVerifyRecord(models.Model):
+
     SEND_CHOICES = (
         ("register", u"注册"),
         ("forget", u"找回密码")

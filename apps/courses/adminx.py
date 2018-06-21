@@ -7,14 +7,13 @@ import  xadmin
 
 class CourseAdmin(object):
     list_display =['name','desc','detail','degree','learn_times','students']
-    search_fmakields=['name','desc','detail','degree','students']
+    search_fields=['name','desc','detail','degree','students']
     list_filter =['name','desc','detail','degree','learn_times']
 
 
 class LessonAdmin(object):
-    list_displau=['course','name','add_time']
+    list_display =['course','name','add_time']
     search_fields = ['course','name']
-
     list_filter=['course__name','name','add_time']
 
 

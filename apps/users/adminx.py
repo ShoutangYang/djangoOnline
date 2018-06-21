@@ -1,19 +1,18 @@
 __author__='shoutang.yang'
 __date__='2018/5/6 0009 15:09'
 
-import  xadmin
-from django.contrib.auth.models import  Group,Permission
 
+from django.contrib.auth.models import  Group,Permission
 
 from operation.models import CourseComments,UserProfile,UserMessage,UserCourse,UserAsk,UserFavorite
 from organization.models import CityDict,Teacher,CourseOrg
 from xadmin.models import Log
 from courses.models import Course,Video,Lesson,CourseResource
 from .models import EmailVerifyRecord,Banner,UserProfile
-
+import  xadmin
 from xadmin import  views
 
-
+# 继承顶层  object的类
 class EmailVerifyRecordAdmin(object):
     list_display=['code','email','send_type','send_time']
     search_fields = ['code','email','send_type']
@@ -21,24 +20,27 @@ class EmailVerifyRecordAdmin(object):
 
 class BannerAdmin(object):
     list_display = ['title','image','url','index','add_time']
-
     search_fields = ['title','image','url','index']
     list_filter = ['title','image','url','index','add_time']
 
 
+#  注册验证和轮播
 xadmin.site.register(EmailVerifyRecord,EmailVerifyRecordAdmin)
 xadmin.site.register(Banner,BannerAdmin)
 
 
+# #  设置xadmin 的菜单栏和主题
+# x'admin 全局设置
+
 class BaseSetting(object):
-    enable_themse = True
+    enable_themes = True
     use_bootswatch = True
 
 xadmin.site.register(views.BaseAdminView,BaseSetting)
 
 class GlobalSetting(object):
-    site_title='Tony.Yang 后台管理'
-    site_footer='tony.Yang Station'
+    site_title='Tony.Yang后台管理系统'
+    site_footer='Tony.Yang Station'
 
     menu_style ='accordion'
 
@@ -59,7 +61,7 @@ class GlobalSetting(object):
 
             {'title': '用户管理', 'menus': (
                 {'title': '用户信息', 'url': self.get_model_url(UserProfile, 'changelist')},
-                {'title': '用户验证', 'url': self.get_model_url(EmailVerifyRecord, 'changelist')},
+                {'title': '邮箱验证', 'url': self.get_model_url(EmailVerifyRecord, 'changelist')},
                 {'title': '用户课程', 'url': self.get_model_url(UserCourse, 'changelist')},
                 {'title': '用户收藏', 'url': self.get_model_url(UserFavorite, 'changelist')},
                 {'title': '用户消息', 'url': self.get_model_url(UserMessage, 'changelist')},

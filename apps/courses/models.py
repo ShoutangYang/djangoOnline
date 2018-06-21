@@ -32,6 +32,9 @@ class Course(models.Model):
         verbose_name_plural = verbose_name
 
 
+    def __str__(self):
+        return self.name
+
 # 章节
 class Lesson(models.Model):
     # 因为一个课程对应很多章节。所以在章节表中将课程设置为外键。

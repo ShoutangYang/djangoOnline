@@ -30,20 +30,21 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^form/$',getform,name='form_new'),
     url(r'xadmin/',xadmin.site.urls),
-    url(r"^$",TemplateView.as_view(template_name='index.html'),name='index')
+    url(r"^$",TemplateView.as_view(template_name='index.html'),name='index'),
     # path('',TemplateView.as_view(template_name='index.html'),name='index'),
-    # path('login/',LoginView.as_view(),name='login'),
-    # path('register/',RegisterView.as_view(),name='register'),
+    # url('login/$',user_login,name='login'),# 方法登陆，后台调用 user_login 函数
+    url('^login/',LoginView.as_view(),name='login'),# 推荐使用类的方式编写 view
+    url('register/',TemplateView.as_view(template_name='register.html'),name='register'),
     # path('captcha/',include('captcha.urls')),
     # re_path('active/(?P<active_code>.*)/',ActiveUserView.as_view(),name ='user_active'),
     #
-    # path('forget/',ForgetPwdView.as_view(),name = 'forget_pwd'),
+    path('forget/',ForgetPwdView.as_view(),name = 'forget_pwd'),
     # re_path('reset/(?P<active_code>.*)/',ResetView.as_view(),name = 'reset_pwd'),
     #
     # # 修改密码url; 用于passwordreset页面提交表单
-    # path('modify_pwd/', ModifyPwdView.as_view(), name="modify_pwd"),
+    path('modify_pwd/', ModifyPwdView.as_view(), name="modify_pwd"),
     #
-    # path('org_list/',OrgView.as_view(),name='org_list'),
+    path('org_list/',OrgView.as_view(),name='org_list'),
 
     # 注册url
  # path("register/", RegisterView.as_view(), name = "register" )

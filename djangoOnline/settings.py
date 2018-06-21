@@ -139,6 +139,7 @@ USE_L10N = True
 
 USE_TZ = False
 
+# 自定义认证方法
 AUTHENTICATION_BACKENDS =(
     'users.views.CustomBackend',
 )

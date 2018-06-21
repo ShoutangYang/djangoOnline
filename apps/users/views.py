@@ -14,10 +14,14 @@ from .forms import  LoginForm,RegisterForm,ActiveForm,ForgetForm,ModifyPwdForm
 from utils.email_send import send_register_eamil
 
 # Create your views here.
+
+# 认证方法会自动调用：
+#  - 在setting 中需要设置
 class CustomBackend(ModelBackend):
     def authenticate(self, username=None, password=None, **kwargs):
         try:
             # 不希望用户存在两个，get只能有一个。两个是get失败的一种原因 Q为使用并集查询
+            # 判断用户是否存在 同时判断
             user = UserProfile.objects.get(Q(username=username)|Q(email=username))
             # django的后台中密码加密：所以不能password==password
             # UserProfile继承的AbstractUser中有def check_password(self, raw_password):
@@ -28,8 +32,9 @@ class CustomBackend(ModelBackend):
 
 
 
-
-
+#  django 推荐使用类的方式编写 view,
+#  - 方便维护，代码清晰；
+#  - get post 方法
 class LoginView(View):
     def get(self,request):
         # render就是渲染html返回用户
@@ -63,6 +68,8 @@ class LoginView(View):
 
 
 # 当我们配置url被这个view处理时，自动传入request对象.
+#  方法登陆的时候，需要判断是POST 还是GET
+
 def user_login(request):
     # 前端向后端发送的请求方式: get 或post
 

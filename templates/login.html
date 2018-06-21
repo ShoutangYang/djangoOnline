@@ -50,9 +50,9 @@
     <div class="c-box bg-box">
         <div class="login-box clearfix">
             <div class="hd-login clearfix">
-                <a class="index-logo" href="index.html"></a>
+                <a class="index-logo" href="/"></a>
                 <h1>用户登录</h1>
-                <a class="index-font" href="index.html">回到首页</a>
+                <a class="index-font" href="/">回到首页</a>
             </div>
             <div class="fl slide">
                 <div class="imgslide">
@@ -82,6 +82,7 @@
                     </div>
                     <div class="error btns login-form-tips" id="jsLoginTips">
                         {%  for key,error in login_form.errors.items %}
+
                         {{ error }}
                         {% endfor %}
                         {{ msg }}

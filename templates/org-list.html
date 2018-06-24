@@ -149,6 +149,7 @@
                 </div>
                 <p class="error company-tips" id="jsCompanyTips"></p>
 				<input class="btn" type="text" id="jsStayBtn" value="立即咨询 >" />
+                {% csrf_token %}
             </form>
 		</div>
 
@@ -169,4 +170,30 @@
 		    </div>
         </div>
 </section>
+{% endblock %}
+{% block custom_js %}
+    <script>
+        $(function () {
+            $('#jsStayBtn').on('click',function () {
+                $.ajax({
+                    cacha:false,
+                    type:'POST',
+                    url:"{% url "org:add_ask" %}",
+                    data:$("#jsStayForm").serialize(),
+                    async:true,
+                    success: function (data) {
+                        console.log(data)
+                        alert(data)
+                        if (data.status=='succsess'){
+                            $("#jsStayForm")[0].reset();
+                            alert('提交成功！')
+
+                        }else if(data.status=='fail'){
+                            $("#jsCompanyTips").html(data.msg)
+                        }
+                    },
+                });
+            });
+        })
+    </script>
 {% endblock %}

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from pure_pagination import PageNotAnInteger,Paginator
 from .models import CourseOrg,CityDict,Teacher
+from .forms import UserAskForm
+from django.http import  HttpResponse
 # Create your views here.
 
 class OrgView(View):
@@ -46,3 +48,14 @@ class OrgView(View):
         })
     def post(self):
         pass
+
+
+class AddUserAskView(View):
+
+    def post(self,request):
+        userask_form= UserAskForm(request.POST)
+        if userask_form.is_valid():
+            user_ask= userask_form.save(commit=True)
+            return HttpResponse('{"status":"success"}',content_type='application/json') # ajsz 提交数据时，最外为单引号，内部为双引号
+        else:
+            return  HttpResponse('{"status":"fail","msg":"添加出错"}',content_type='application/json')

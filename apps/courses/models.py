@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import  datetime
-
+from organization.models import  CourseOrg
 
 # 课程信息表
 class Course(models.Model):
@@ -9,6 +9,7 @@ class Course(models.Model):
         ("zj", u"中级"),
         ("gj", u"高级")
     )
+    course_org = models.ForeignKey(CourseOrg,verbose_name='课程机构',blank=True,on_delete=models.CASCADE,default='')
     name = models.CharField(max_length=50, verbose_name=u"课程名")
     desc = models.CharField(max_length=300, verbose_name=u"课程描述")
     # TextField允许我们不输入长度。可以输入到无限大。暂时定义为TextFiled，之后更新为富文本

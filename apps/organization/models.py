@@ -36,10 +36,12 @@ class CourseOrg(models.Model):
     category = models.CharField(max_length=20,choices=(('pxjg','培训机构'),('gr',"个人"),('gx','高效')),verbose_name='机构类别',default='培训机构')
     students = models.IntegerField(default=0,verbose_name="学习人数")
     course_nums = models.IntegerField(default=0,verbose_name='课程数')
+
     class Meta:
         verbose_name = u"课程机构"
         verbose_name_plural = verbose_name
-
+    def __str__(self):
+        return self.name
 
 
 # 讲师

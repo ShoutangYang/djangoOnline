@@ -52,7 +52,7 @@ def send_register_eamil(email, send_type="register"):
 
     if send_type == "register":
         email_title = "Tony 慕课小站 注册激活链接"
-        # email_body = "欢迎注册mtianyan的慕课小站:  请点击下面的链接激活你的账号: http://127.0.0.1:8000/active/{0}".format(code)
+        email_body = "欢迎注册mtianyan的慕课小站:  请点击下面的链接激活你的账号: http://127.0.0.1:8000/active/{0}".format(code)
 
         email_body = loader.render_to_string(
                 "email_register.html",  # 需要渲染的html模板
@@ -72,12 +72,10 @@ def send_register_eamil(email, send_type="register"):
         if send_status:
                 pass
     elif send_type=='forget':
-        email_title="Tony.Yang 小站 找回密码链接"
-        email_body = loader.render_to_string(
-            'email_forget.html',{
-                'active_code':code
-            }
-        )
+        email_title="Tony.Yang 小站 注册密码链接"
+        email_body = " 请点击下面的链接重置密码：http://127.0.0.1:8000/reset/{0}".format(code)
+
+
         msg=EmailMessage(email_title,email_body,EMAIL_FROM,[email])
         msg.content_subtype='html'
         send_status = msg.send()

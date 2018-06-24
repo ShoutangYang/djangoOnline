@@ -15,7 +15,7 @@ from utils.email_send import send_register_eamil
 
 # Create your views here.
 
-# 认证方法会自动调用：
+#  认证方法会自动调用：
 #  - 在setting 中需要设置
 class CustomBackend(ModelBackend):
     def authenticate(self, username=None, password=None, **kwargs):
@@ -53,12 +53,15 @@ class LoginView(View):
             user = authenticate(username=user_name, password=pass_word)
         # 如果不是null说明验证成功
             if user is not None:
-                # login_in 两参数：request, user
-                # 实际是对request写了一部分东西进去，然后在render的时候：
-                # request是要render回去的。这些信息也就随着返回浏览器。完成登录l
-                login(request, user)
-                # 跳转到首页 user request会被带回到首页
-                return render(request, "index.html")
+                if user.is_active :
+                    # login_in 两参数：request, user
+                    # 实际是对request写了一部分东西进去，然后在render的时候：
+                    # request是要render回去的。这些信息也就随着返回浏览器。完成登录l
+                        login(request, user)
+                    # 跳转到首页 user request会被带回到首页
+                        return render(request, "index.html")
+                else:
+                    return   render(request, "login.html", {"msg": "用户未激活!"})
             # 没有成功说明里面的值是None，并再次跳转回主页面
             else:
                 return render(request, "login.html", {"msg": "用户名或密码错误!"})
@@ -107,17 +110,17 @@ class RegisterView(View):
 
     def post(self,request):
         register_form = RegisterForm(request.POST)
-
+        # 自动验证验证码是否正确
         if register_form.is_valid():
             user_name = request.POST.get('email','')
             if UserProfile.objects.filter(email=user_name):
                 return render(request, "register.html", {"register_form": register_form, "msg": "用户已经存在"})
-            pass_word = request.POST.get("password", "")
 
+            pass_word = request.POST.get("password", "")
             user_profile = UserProfile()
             user_profile.username = user_name
             user_profile.email = user_name
-
+            # 将密码哈希加密
             user_profile.password = make_password(pass_word)
             user_profile.is_active = False
 
@@ -170,7 +173,7 @@ class ForgetPwdView(View):
             return render(request, "login.html", {"msg": "重置密码邮件已发送,请注意查收"})
         # 如果表单验证失败也就是他验证码输错等。
         else:
-            return render(request, "forgetpwd.html", {"forget_from": forget_form})
+            return render(request, "forgetpwd.html", {"forget_form": forget_form})
 
 class ResetView(View):
     def get(self, request, active_code):

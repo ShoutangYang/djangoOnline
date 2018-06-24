@@ -14,6 +14,8 @@ class CityDict(models.Model):
         verbose_name = u"城市"
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.name
 
 # 课程机构
 class CourseOrg(models.Model):
@@ -24,14 +26,16 @@ class CourseOrg(models.Model):
     fav_nums = models.IntegerField(default=0, verbose_name=u"收藏数")
     image = models.ImageField(
         upload_to="org/%Y/%m",
-        verbose_name=u"封面图",
+        verbose_name=u"logo",
         max_length=100)
     address = models.CharField(max_length=150, verbose_name=u"机构地址")
     # 一个城市可以有很多课程机构，通过将city设置外键，变成课程机构的一个字段
     # 可以让我们通过机构找到城市
     city = models.ForeignKey(CityDict, verbose_name=u"所在城市",on_delete=models.CASCADE)
     add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
-
+    category = models.CharField(max_length=20,choices=(('pxjg','培训机构'),('gr',"个人"),('gx','高效')),verbose_name='机构类别',default='培训机构')
+    students = models.IntegerField(default=0,verbose_name="学习人数")
+    course_nums = models.IntegerField(default=0,verbose_name='课程数')
     class Meta:
         verbose_name = u"课程机构"
         verbose_name_plural = verbose_name

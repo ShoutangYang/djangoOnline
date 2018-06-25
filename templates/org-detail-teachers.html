@@ -1,5 +1,5 @@
-{% extends 'org_base.html' %}
-{% block title %}机构讲师详情 | mtianyan慕课小站{% endblock %}
+{% extends 'org-base.html' %}
+{% block title %}机构讲师详情 | Tony.Yang慕课小站{% endblock %}
 {% block page_path %}机构讲师{% endblock %}
 {% load staticfiles %}
 {% block right_form %}
@@ -13,13 +13,13 @@
 {% for teacher in all_teachers %}
                 <dl class="des users">
                     <dt>
-                        <a href="{% url 'org:teacher_detail' teacher.id %}">
+                        <a href="">
                         <img width="100" height="100" class="scrollLoading" data-url="{{ MEDIA_URL }}{{ teacher.image }}" src="{{ MEDIA_URL }}{{ teacher.image }}"/>
                         </a>
                     </dt>
                     <dd>
                         <h1>
-                            <a href="{% url 'org:teacher_detail' teacher.id %}">
+                            <a href="">
                             {{ teacher.name }}<span class="key">已认证</span>
                             </a>
                         </h1>

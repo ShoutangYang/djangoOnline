@@ -72,11 +72,73 @@ class OrgHomeView(View):
         :param org_id:
         :return:
         """
+        current_page = 'home'
         course_org = CourseOrg.objects.get(id=int(org_id))
         all_courses= course_org.course_set.all()[:3]
         all_teachers = course_org.teacher_set.all()[:1]
         return render(request,'org-detail-homepage.html',{
             'all_courses':all_courses,
-            'all_teacher':all_teachers,
+            'all_teachers':all_teachers,
+            'course_org':course_org,
+            'current_page':current_page,
         })
 
+class OrgCourseView(View):
+    """
+    机构课程
+    """
+    def get(self,request,org_id):
+        """
+
+        :param request:
+        :param org_id:
+        :return:
+        """
+        current_page = 'course'
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        all_courses= course_org.course_set.all()
+
+        return render(request,'org-detail-course.html',{
+            'all_courses':all_courses,
+            'current_page':current_page,
+            'course_org':course_org,
+        })
+
+class OrgDescView(View):
+    """
+    机构介绍
+    """
+    def get(self,request,org_id):
+        """
+
+        :param request:
+        :param org_id:
+        :return:
+        """
+        current_page = 'desc'
+        course_org = CourseOrg.objects.get(id=int(org_id))
+
+        return render(request,'org-detail-desc.html',{
+            'current_page':current_page,
+            'course_org':course_org,
+        })
+
+class OrgTeachersView(View):
+    """
+    机构老师
+    """
+    def get(self,request,org_id):
+        """
+
+        :param request:
+        :param org_id:
+        :return:
+        """
+        current_page = 'teachers'
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        all_teachers = course_org.teacher_set.all()
+        return render(request,'org-detail-teachers.html',{
+            'all_teachers':all_teachers,
+            'current_page':current_page,
+            'course_org': course_org,
+        })

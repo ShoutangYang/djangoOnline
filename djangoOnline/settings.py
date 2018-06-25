@@ -82,7 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 'django.core.context_processors.media',
+                'django.template.context_processors.media'  # 启用 MEDIA 模板字段
             ],
         },
     },
@@ -156,6 +156,7 @@ STATICFILES_DIRS=[
 ]
 
 MEDIA_URL ='/media/'
+
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 #
@@ -169,6 +170,5 @@ EMAIL_FROM ='to_tsy@163.com'
 PAGINATION_SETTINGS = {
     'PAGE_RANGE_DISPLAYED': 10,
     'MARGIN_PAGES_DISPLAYED': 2,
-
     'SHOW_FIRST_PAGE_WHEN_INVALID': True,
 }

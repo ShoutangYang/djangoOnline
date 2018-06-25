@@ -60,7 +60,7 @@
 	<div class="wp">
 		<ul  class="crumbs">
             <li><a href="index.html">首页</a>></li>
-			<li><a href="org-list.html">课程机构</a>></li>
+			<li><a href="{% url 'org:org_list' %}">课程机构</a>></li>
 			<li>{% block page_title %}机构首页{% endblock %}</li>
 		</ul>
 	</div>
@@ -200,16 +200,16 @@ function add_fav(current_elem, fav_id, fav_type){
     $.ajax({
         cache: false,
         type: "POST",
-        url:"/org/add_fav/",
+        url:"{% url 'org:add_fav' %}",
         data:{'fav_id':fav_id, 'fav_type':fav_type},
         async: true,
         beforeSend:function(xhr, settings){
-            xhr.setRequestHeader("X-CSRFToken", "5I2SlleZJOMUX9QbwYLUIAOshdrdpRcy");
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
         },
         success: function(data) {
             if(data.status == 'fail'){
                 if(data.msg == '用户未登录'){
-                    window.location.href="login.html";
+                    window.location.href="/login/";
                 }else{
                     alert(data.msg)
                 }
@@ -280,11 +280,12 @@ $(function() {
         dots: true,               //  Display dot navigation
         fluid: false              //  Support responsive design. May break non-responsive designs
     });
+    /*
     var unslider = $('.imgslide').unslider();
     $('.unslider-arrow').click(function() {
         var fn = this.className.split(' ')[1];
         unslider.data('unslider')[fn]();
-    });
+    });*/
 });
 </script>
 

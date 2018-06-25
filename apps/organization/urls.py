@@ -5,7 +5,7 @@ __author__ = 'Tony.Yang'
 # 分发 url,include
 
 from django.conf.urls import  url,include
-from .views import OrgView,AddUserAskView,OrgHomeView,OrgCourseView,OrgDescView,OrgTeachersView
+from .views import OrgView,AddUserAskView,OrgHomeView,OrgCourseView,OrgDescView,OrgTeachersView,AddFavView
 app_name = 'org'
 urlpatterns =[
     url(r'^list/$', OrgView.as_view(), name='org_list'),
@@ -14,4 +14,7 @@ urlpatterns =[
     url('^course/(?P<org_id>\d+)/$',OrgCourseView.as_view(),name='org_course'),
     url('^desc/(?P<org_id>\d+)/$',OrgDescView.as_view(),name='org_desc'),
     url('^teachers/(?P<org_id>\d+)/$',OrgTeachersView.as_view(),name='org_teachers'),
+
+    #机构收藏
+    url('^add_fav/$',AddFavView.as_view(),name='add_fav'),
 ]
